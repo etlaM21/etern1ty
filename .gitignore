@@ -60,7 +60,7 @@ tests/**/gcc-release/
 #########################
 
 # VSCode
-*.code-workspace
+# *.code-workspace
 .vscode
 
 # XCode
