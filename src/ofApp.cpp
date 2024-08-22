@@ -23,7 +23,7 @@ void ofApp::setup(){
 	// drawPath = createPathFromVertices(addWidthToLine(getLineFromPoints(linePoints)));
 }
 
-ofPolyline ofApp::getLineFromPoints(vector<glm::vec2> points) {
+ofPolyline ofApp::getLineFromPoints(const vector<glm::vec2>& points) {
 	ofPolyline pointLine;
 	for( int i = 0; i < points.size(); i++){
 		if(points.size() >= 4) {
@@ -38,9 +38,9 @@ ofPolyline ofApp::getLineFromPoints(vector<glm::vec2> points) {
 	return pointLine;
 }
 
-void ofApp::addWidthToLine(ofPolyline pointLine){
+void ofApp::addWidthToLine(const ofPolyline& pointLine){
 
-	vector<glm::vec3> vertices = pointLine.getVertices();
+	const vector<glm::vec3>& vertices = pointLine.getVertices();
 
 	for (int vertexIndex = 0; vertexIndex < vertices.size(); vertexIndex++) {
 		if(linePathWidth.size() < vertexIndex) {
@@ -50,7 +50,7 @@ void ofApp::addWidthToLine(ofPolyline pointLine){
 	
 }
 
-vector<glm::vec3> ofApp::createVertsFromPath(ofPolyline pointLine, vector<glm::vec2> width){
+vector<glm::vec3> ofApp::createVertsFromPath(const ofPolyline& pointLine, const vector<glm::vec2>& width){
 	vector<glm::vec3> thickLinePoints;
 	if(!width.empty()) {
 		vector<glm::vec3> vertices = pointLine.getVertices();

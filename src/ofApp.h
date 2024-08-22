@@ -20,9 +20,9 @@ class ofApp : public ofBaseApp{
 	
 		ofShader shader;
 
-		ofPolyline getLineFromPoints(vector<glm::vec2> points);
-		void addWidthToLine(ofPolyline pointLine); 
-		vector<glm::vec3> createVertsFromPath(ofPolyline pointLine, vector<glm::vec2> width); 
+		ofPolyline getLineFromPoints(const vector<glm::vec2>& points);
+		void addWidthToLine(const ofPolyline& pointLine); 
+		vector<glm::vec3> createVertsFromPath(const ofPolyline& pointLine, const vector<glm::vec2>& width); 
 		void addVertsToPath(vector<glm::vec3>& path, const vector<glm::vec3>& newPath);
 		ofPath createPathFromVertices(const vector<glm::vec3>& vertices);
 };
