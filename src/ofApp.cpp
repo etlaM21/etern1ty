@@ -1,13 +1,16 @@
 #include "ofApp.h"
+#include "Brush.h"
 
-ofPath drawPath;
+/* ofPath drawPath;
 vector<ofPath> allPaths;
 ofPolyline linePath;
 vector<glm::vec2> linePathWidth;
 float lineSize = 12.0;
 float lineSizeVariation = 0.5;
 vector<glm::vec3> pathVerts;
-vector<glm::vec2> linePoints;
+vector<glm::vec2> linePoints; */
+
+Brush userBrush;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -18,11 +21,9 @@ void ofApp::setup(){
 	}
 	ofBackground(255,255,255);
 	
-	drawPath.setFilled(true);
-	
-	// drawPath = createPathFromVertices(addWidthToLine(getLineFromPoints(linePoints)));
+	// drawPath.setFilled(true);
 }
-
+/*
 ofPolyline ofApp::getLineFromPoints(const vector<glm::vec2>& points) {
 	ofPolyline pointLine;
 	for( int i = 0; i < points.size(); i++){
@@ -99,7 +100,7 @@ ofPath ofApp::createPathFromVertices(const vector<glm::vec3>& vertices) {
 		path.close();
 	}
 	return path;
-}
+} */
 
 //--------------------------------------------------------------
 void ofApp::update(){
@@ -111,11 +112,13 @@ void ofApp::draw(){
 	
 	shader.begin();
 
-	drawPath.draw();
+	/* drawPath.draw();
 
 	for( int i = 0; i < allPaths.size(); i++){
 		allPaths[i].draw();
-	}
+	} */
+
+	userBrush.draw();
 
 	shader.end();
 }
@@ -137,11 +140,12 @@ void ofApp::mouseMoved(int x, int y){
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-	linePoints.push_back(glm::vec2(x, y));
-	linePath = getLineFromPoints(linePoints);
-	addWidthToLine(linePath);
-	drawPath = createPathFromVertices(createVertsFromPath(linePath, linePathWidth));
-	if(!linePoints.empty() && linePoints.size() >= 4) {
+	userBrush.addBrushPosition(x, y);
+	// linePoints.push_back(glm::vec2(x, y));
+	// linePath = getLineFromPoints(linePoints);
+	// addWidthToLine(linePath);
+	// drawPath = createPathFromVertices(createVertsFromPath(linePath, linePathWidth));
+	// if(!linePoints.empty() && linePoints.size() >= 4) {
 		// drawPath = createPathFromVertices(addWidthToLine(getLineFromPoints(linePoints)));
 		/* if (linePoints.size() % 4 == 0) {
 			vector<glm::vec3> vertices = linePath.getVertices();
@@ -152,18 +156,19 @@ void ofApp::mouseDragged(int x, int y, int button){
 			addVertsToPath(pathVerts, addWidthToLine(newLine));
 			drawPath = createPathFromVertices(pathVerts);
 		} */
-	}
+	// }
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-	// drawPath.clear();
-	linePoints.clear();
+	// linePoints.clear();
+	userBrush.startNewPath();
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-	allPaths.push_back(drawPath);
+	// allPaths.push_back(drawPath);
+	userBrush.endNewPath();
 }
 
 //--------------------------------------------------------------

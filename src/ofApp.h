@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "Brush.h"
 
 class ofApp : public ofBaseApp{
 	public:
