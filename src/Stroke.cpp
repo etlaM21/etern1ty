@@ -1,39 +1,22 @@
 #include "ofApp.h"
-#include "Stroke.h"
 
 
-Brush::Brush(){
-    
+Stroke::Stroke(){
+	zPosition = 0;
+}
+
+Stroke::Stroke(float zHeight){
+	zPosition = zHeight;
 }
 //--------------------------------------------------------------
-void Brush::draw(){
+void Stroke::draw(){
     
-    drawStroke.draw();
-
-	for( int i = 0; i < allStrokes.size(); i++){
-		allStrokes[i].draw();
-	} 
+    drawMesh.draw();
     
 }
 
 
-void Brush::moveBrush(int x, int y){
-	drawStroke.addBrushPosition(x, y);
-}
-
-//--------------------------------------------------------------
-void Brush::startNewStroke(){
-	drawStroke = Stroke(allStrokes.size() / 10);
-    // delete drawStroke;
-}
-
-//--------------------------------------------------------------
-void Brush::endStroke(){
-	allStrokes.push_back(drawStroke);
-}
-
-
-void Brush::addBrushPosition(int x, int y){
+void Stroke::addBrushPosition(int x, int y){
 	linePoints.push_back(glm::vec2(x, y));
 	linePath = getLineFromPoints(linePoints);
 	addWidthToLine(linePath);
@@ -44,32 +27,32 @@ void Brush::addBrushPosition(int x, int y){
 }
 
 //--------------------------------------------------------------
-void Brush::startNewPath(){
+void Stroke::startNewPath(){
 	linePoints.clear();
 }
 
 //--------------------------------------------------------------
-void Brush::endNewPath(){
-	allPaths.push_back(drawPath);
-    allMeshes.push_back(drawMesh);
+void Stroke::endNewPath(){
+	// allPaths.push_back(drawPath);
+    // allMeshes.push_back(drawMesh);
 }
 
-ofPolyline Brush::getLineFromPoints(const vector<glm::vec2>& points) {
+ofPolyline Stroke::getLineFromPoints(const vector<glm::vec2>& points) {
 	ofPolyline pointLine;
 	for( int i = 0; i < points.size(); i++){
 		if(points.size() >= 4) {
-			pointLine.curveTo(points[i].x, points[i].y, allPaths.size() / 10, 100);
+			pointLine.curveTo(points[i].x, points[i].y, zPosition, 100);
 		}
 		else {
-			pointLine.addVertex(points[i].x, points[i].y, allPaths.size() / 10);
+			pointLine.addVertex(points[i].x, points[i].y, zPosition);
 		}
 	}
 	// pointLine.close();
-	pointLine.simplify(2.5);
+	pointLine.simplify(simplificationFactor);
 	return pointLine;
 }
 
-void Brush::addWidthToLine(const ofPolyline& pointLine){
+void Stroke::addWidthToLine(const ofPolyline& pointLine){
 
 	const vector<glm::vec3>& vertices = pointLine.getVertices();
 
@@ -81,7 +64,7 @@ void Brush::addWidthToLine(const ofPolyline& pointLine){
 	
 }
 
-vector<glm::vec3> Brush::createVertsFromPath(const ofPolyline& pointLine, const vector<glm::vec2>& width){
+vector<glm::vec3> Stroke::createVertsFromPath(const ofPolyline& pointLine, const vector<glm::vec2>& width){
 	vector<glm::vec3> thickLinePoints;
 	if(!width.empty()) {
 		vector<glm::vec3> vertices = pointLine.getVertices();
@@ -107,20 +90,7 @@ vector<glm::vec3> Brush::createVertsFromPath(const ofPolyline& pointLine, const 
 	return thickLinePoints;
 }
 
-void Brush::addVertsToPath(vector<glm::vec3>& path, const vector<glm::vec3>& newPath) {
-	for (int vertexIndex = 0; vertexIndex < newPath.size(); vertexIndex++){
-		// path.push_back(newPath[vertexIndex]);
-		if (path.size() < 2) {
-			path.push_back(newPath[vertexIndex]);
-		}
-		else {
-			int insertIndex = (int)ceil(path.size() / 2);
-			path.insert(path.begin() + insertIndex, newPath[vertexIndex]);
-		}
-	}
-}
-
-ofPath Brush::createPathFromVertices(const vector<glm::vec3>& vertices) {
+ofPath Stroke::createPathFromVertices(const vector<glm::vec3>& vertices) {
 	ofPath path;
 	if (vertices.size() >= 2) {
 		path.moveTo(vertices[0]);
@@ -129,12 +99,16 @@ ofPath Brush::createPathFromVertices(const vector<glm::vec3>& vertices) {
 		}
 		path.close();
 	}
-    path.simplify(2.5);
+    path.simplify(simplificationFactor);
 	return path;
 }
 
-void Brush::colorMesh(ofMesh& meshToColor) {
-    for (int i = 0; i < meshToColor.getNumVertices(); i++) {
-        meshToColor.addColor(ofColor::fromHsb(0, 0, ofRandom(0, 55)));
+void Stroke::colorMesh(ofMesh& meshToColor) {
+	int index = 0;
+	if(meshToColor.hasColors()){
+		index = meshToColor.getColors().size();
+	} 
+    for (int i = index; i < meshToColor.getNumVertices(); i++) {
+        meshToColor.addColor(ofColor::fromHsb(0, 0, ofRandom(0, 100)));
     }
 }

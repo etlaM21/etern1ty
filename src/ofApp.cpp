@@ -140,7 +140,7 @@ void ofApp::mouseMoved(int x, int y){
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-	userBrush.addBrushPosition(x, y);
+	userBrush.moveBrush(x, y);
 	// linePoints.push_back(glm::vec2(x, y));
 	// linePath = getLineFromPoints(linePoints);
 	// addWidthToLine(linePath);
@@ -162,13 +162,13 @@ void ofApp::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
 	// linePoints.clear();
-	userBrush.startNewPath();
+	userBrush.startNewStroke();
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
 	// allPaths.push_back(drawPath);
-	userBrush.endNewPath();
+	userBrush.endStroke();
 }
 
 //--------------------------------------------------------------

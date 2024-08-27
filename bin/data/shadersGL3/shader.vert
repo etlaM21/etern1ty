@@ -3,9 +3,10 @@ OF_GLSL_SHADER_HEADER
 uniform mat4 modelViewProjectionMatrix;
 
 in vec4 position;
-out vec4 vertexColor;
+in vec4 vertexColor;
+out vec4 color;
 
 void main(){
-	vertexColor = vec4(0.0, 0.0, 0.0, 1.0);
+	color = vertexColor;
 	gl_Position = modelViewProjectionMatrix * position;
 }
