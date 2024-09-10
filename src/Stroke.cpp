@@ -16,7 +16,7 @@ void Stroke::draw(){
 }
 
 
-void Stroke::addBrushPosition(int x, int y){
+void Stroke::addStrokePosition(int x, int y){
 	linePoints.push_back(glm::vec2(x, y));
 	linePath = getLineFromPoints(linePoints);
 	addWidthToLine(linePath);
@@ -57,7 +57,7 @@ void Stroke::addWidthToLine(const ofPolyline& pointLine){
 	const vector<glm::vec3>& vertices = pointLine.getVertices();
 
 	for (int vertexIndex = 0; vertexIndex < vertices.size(); vertexIndex++) {
-		if(linePathWidth.size() < vertexIndex) {
+		if(linePathWidth.size() <= vertexIndex) {
 			linePathWidth.push_back(glm::vec2(lineSize * ofRandom(1 - lineSizeVariation, 1), lineSize * ofRandom(1 - lineSizeVariation, 1)));
 		}
 	}
@@ -106,9 +106,9 @@ ofPath Stroke::createPathFromVertices(const vector<glm::vec3>& vertices) {
 void Stroke::colorMesh(ofMesh& meshToColor) {
 	int index = 0;
 	if(meshToColor.hasColors()){
-		index = meshToColor.getColors().size();
+		index = meshToColor.getColors().size() - 1;
 	} 
     for (int i = index; i < meshToColor.getNumVertices(); i++) {
-        meshToColor.addColor(ofColor::fromHsb(0, 0, ofRandom(0, 100)));
+		meshToColor.addColor(ofColor::fromHsb(0, 0, ofRandom(0, 75))); // VALUES: 0 -> 255
     }
 }

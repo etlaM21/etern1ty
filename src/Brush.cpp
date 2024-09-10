@@ -18,7 +18,7 @@ void Brush::draw(){
 
 
 void Brush::moveBrush(int x, int y){
-	drawStroke.addBrushPosition(x, y);
+	drawStroke.addStrokePosition(x, y);
 }
 
 //--------------------------------------------------------------
@@ -32,7 +32,7 @@ void Brush::endStroke(){
 	allStrokes.push_back(drawStroke);
 }
 
-
+/*
 void Brush::addBrushPosition(int x, int y){
 	linePoints.push_back(glm::vec2(x, y));
 	linePath = getLineFromPoints(linePoints);
@@ -137,4 +137,4 @@ void Brush::colorMesh(ofMesh& meshToColor) {
     for (int i = 0; i < meshToColor.getNumVertices(); i++) {
         meshToColor.addColor(ofColor::fromHsb(0, 0, ofRandom(0, 55)));
     }
-}
+}*/

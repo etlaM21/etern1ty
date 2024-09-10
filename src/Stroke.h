@@ -8,7 +8,7 @@ class Stroke : public ofBaseApp{
 		Stroke(float zHeight);
 		void draw();
         
-		void addBrushPosition(int x, int y);
+		void addStrokePosition(int x, int y);
 		void startNewPath();
 		void endNewPath();
 
@@ -21,7 +21,7 @@ class Stroke : public ofBaseApp{
         vector<glm::vec2> linePathWidth;
         float lineSize = 12.0;
         float lineSizeVariation = 0.5;
-        float simplificationFactor = 1.5;
+        float simplificationFactor = 1.66;
         vector<glm::vec3> pathVerts;
         vector<glm::vec2> linePoints;
 
