@@ -14,12 +14,13 @@ class Stroke : public ofBaseApp{
 
     private:
 		float zPosition;
+		float birthtime;
 
         ofPath drawPath;
         ofMesh drawMesh;
         ofPolyline linePath;
         vector<glm::vec2> linePathWidth;
-        float lineSize = 12.0;
+        float lineSize = 5.0;
         float lineSizeVariation = 0.5;
         float simplificationFactor = 1.66;
         vector<glm::vec3> pathVerts;

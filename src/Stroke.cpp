@@ -1,12 +1,15 @@
 #include "ofApp.h"
+#include "Stroke.h"
 
 
 Stroke::Stroke(){
 	zPosition = 0;
+	birthtime = ofGetElapsedTimef();
 }
 
 Stroke::Stroke(float zHeight){
 	zPosition = zHeight;
+	birthtime = ofGetElapsedTimef();
 }
 //--------------------------------------------------------------
 void Stroke::draw(){
