@@ -4,12 +4,10 @@
 
 Stroke::Stroke(){
 	zPosition = 0;
-	birthtime = ofGetElapsedTimef();
 }
 
 Stroke::Stroke(float zHeight){
 	zPosition = zHeight;
-	birthtime = ofGetElapsedTimef();
 }
 //--------------------------------------------------------------
 void Stroke::draw(){
@@ -114,4 +112,16 @@ void Stroke::colorMesh(ofMesh& meshToColor) {
     for (int i = index; i < meshToColor.getNumVertices(); i++) {
 		meshToColor.addColor(ofColor::fromHsb(0, 0, ofRandom(0, 75))); // VALUES: 0 -> 255
     }
+}
+
+void Stroke::setAlphaColor(float newAlpha) {
+	ofMesh& meshToColor = drawMesh;
+	if (meshToColor.hasColors()) {
+		for (int i = 0; i < meshToColor.getColors().size(); i++) {
+			ofColor colorToSet = meshToColor.getColor(i);
+			colorToSet.a = newAlpha;
+			meshToColor.setColor(i, colorToSet);
+			// meshToColor.addColor(ofColor::fromHsb(0, 0, ofRandom(0, 75))); // VALUES: 0 -> 255
+		}
+	}
 }

@@ -12,6 +12,8 @@ class Brush : public ofBaseApp{
 		void startNewStroke();
 		void endStroke();
 
+		void decayStrokes();
+
     private:
 		BrushStroke drawStroke;
         vector<BrushStroke> allStrokes;

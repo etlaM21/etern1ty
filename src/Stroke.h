@@ -12,9 +12,10 @@ class Stroke : public ofBaseApp{
 		void startNewPath();
 		void endNewPath();
 
+		void setAlphaColor(float newAlpha);
+
     private:
 		float zPosition;
-		float birthtime;
 
         ofPath drawPath;
         ofMesh drawMesh;

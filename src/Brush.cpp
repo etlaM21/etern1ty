@@ -32,3 +32,12 @@ void Brush::startNewStroke(){
 void Brush::endStroke(){
 	allStrokes.push_back(drawStroke);
 }
+
+void Brush::decayStrokes() {
+	for (int i = 0; i < allStrokes.size(); i++) {
+		float timeLeft = allStrokes[i].decay(); // returns lifeTimeLeft;
+		if (timeLeft <= 0.0) {
+			allStrokes.erase(allStrokes.begin() + i);
+		}
+	}
+}

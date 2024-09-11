@@ -22,6 +22,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 	ofSetColor(255);
+	userBrush.decayStrokes();
 	
 	shader.begin();
 
