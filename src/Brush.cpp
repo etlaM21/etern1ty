@@ -24,7 +24,7 @@ void Brush::moveBrush(int x, int y){
 
 //--------------------------------------------------------------
 void Brush::startNewStroke(){
-	drawStroke = BrushStroke(currentAllStrokeCount / 10);
+	drawStroke = BrushStroke(currentAllStrokeCount / 10, palette[(int) ofRandom(10)]);
     // delete drawStroke;
 }
 

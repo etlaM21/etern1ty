@@ -5,7 +5,7 @@
 class Stroke : public ofBaseApp{
 	public:
 		Stroke();
-		Stroke(float zHeight);
+		Stroke(float zHeight, ofColor& paintColor);
 		void draw();
         
 		void addStrokePosition(int x, int y);
@@ -16,12 +16,13 @@ class Stroke : public ofBaseApp{
 
     private:
 		float zPosition;
+		ofColor drawColor;
 
         ofPath drawPath;
         ofMesh drawMesh;
         ofPolyline linePath;
         vector<glm::vec2> linePathWidth;
-        float lineSize = 5.0;
+        float lineSize = 2.0;
         float lineSizeVariation = 0.5;
         float simplificationFactor = 1.66;
         vector<glm::vec3> pathVerts;

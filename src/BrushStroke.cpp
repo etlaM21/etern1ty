@@ -11,11 +11,11 @@ BrushStroke::BrushStroke(){
 	}
 }
 
-BrushStroke::BrushStroke(float zHeight){
+BrushStroke::BrushStroke(float zHeight, ofColor& paintColor){
 	zPosition = zHeight;
 	birthtime = ofGetElapsedTimef();
 	for (int i = 0; i < NUMBEROFSTROKES; i++) {
-		strokes[i] = Stroke(zHeight + i / 100);
+		strokes[i] = Stroke(zHeight + i / 100, paintColor);
 	}
 }
 //--------------------------------------------------------------

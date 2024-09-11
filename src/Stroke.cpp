@@ -6,8 +6,9 @@ Stroke::Stroke(){
 	zPosition = 0;
 }
 
-Stroke::Stroke(float zHeight){
+Stroke::Stroke(float zHeight, ofColor& paintColor){
 	zPosition = zHeight;
+	drawColor = paintColor;
 }
 //--------------------------------------------------------------
 void Stroke::draw(){
@@ -110,7 +111,11 @@ void Stroke::colorMesh(ofMesh& meshToColor) {
 		index = meshToColor.getColors().size() - 1;
 	} 
     for (int i = index; i < meshToColor.getNumVertices(); i++) {
-		meshToColor.addColor(ofColor::fromHsb(0, 0, ofRandom(0, 75))); // VALUES: 0 -> 255
+		meshToColor.addColor(ofColor::fromHsb(
+			drawColor[0] * ofRandom(1, 0.95),
+			drawColor[1] * ofRandom(1, 0.85),
+			drawColor[2]) * ofRandom(1, 0.75)
+		); // VALUES: 0 -> 255
     }
 }
 
