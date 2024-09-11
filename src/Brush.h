@@ -1,5 +1,7 @@
 #pragma once
 
+#define MAXIMUMSTROKES 10
+
 #include "ofMain.h"
 #include "BrushStroke.h"
 
@@ -16,5 +18,7 @@ class Brush : public ofBaseApp{
 
     private:
 		BrushStroke drawStroke;
-        vector<BrushStroke> allStrokes;
+		int currentAllStrokeCount = 0;
+		BrushStroke allStrokes[MAXIMUMSTROKES];
+        // vector<BrushStroke> allStrokes;
 };

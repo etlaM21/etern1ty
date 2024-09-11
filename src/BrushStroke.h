@@ -1,5 +1,7 @@
 #pragma once
 
+#define NUMBEROFSTROKES 1
+
 #include "ofMain.h"
 #include "Stroke.h"
 
@@ -22,9 +24,9 @@ class BrushStroke : public ofBaseApp{
 		float decayTime = 1.0;
 		float decayStepLinear = 255 / decayTime;
 
-		int nStrokes = 1;
 		float strokePositionVariation = 1;
-		vector<Stroke> strokes;
+		Stroke strokes[NUMBEROFSTROKES];
+		// vector<Stroke> strokes;
 
 		void resetBirthTime();
 };

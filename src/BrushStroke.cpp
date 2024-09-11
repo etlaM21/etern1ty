@@ -6,22 +6,22 @@
 BrushStroke::BrushStroke(){
 	zPosition = 0;
 	birthtime = ofGetElapsedTimef();
-	for (int i = 0; i < nStrokes; i++) {
-		strokes.push_back(Stroke());
+	for (int i = 0; i < NUMBEROFSTROKES; i++) {
+		strokes[i] = Stroke();
 	}
 }
 
 BrushStroke::BrushStroke(float zHeight){
 	zPosition = zHeight;
 	birthtime = ofGetElapsedTimef();
-	for (int i = 0; i < nStrokes; i++) {
-		strokes.push_back(Stroke(zHeight + i / 100));
+	for (int i = 0; i < NUMBEROFSTROKES; i++) {
+		strokes[i] = Stroke(zHeight + i / 100);
 	}
 }
 //--------------------------------------------------------------
 void BrushStroke::draw(){
   
-	for (int i = 0; i < strokes.size(); i++) {
+	for (int i = 0; i < NUMBEROFSTROKES; i++) {
 		strokes[i].draw();
 	}
     
@@ -30,7 +30,7 @@ void BrushStroke::draw(){
 float BrushStroke::decay() {
 	lifeTimeLeft = lifeTime - (ofGetElapsedTimef() - birthtime);
 	if (lifeTimeLeft <= decayTime && lifeTimeLeft > 0.0) {
-		for (int i = 0; i < strokes.size(); i++) {
+		for (int i = 0; i < NUMBEROFSTROKES; i++) {
 			strokes[i].setAlphaColor(255 * (lifeTimeLeft / decayTime));
 		}
 	}
@@ -38,8 +38,11 @@ float BrushStroke::decay() {
 }
 
 void BrushStroke::addStrokePosition(int x, int y){
-	for (int i = 0; i < strokes.size(); i++) {
-		strokes[i].addStrokePosition(x + ofRandom(-strokePositionVariation, strokePositionVariation), y + ofRandom(-strokePositionVariation, strokePositionVariation));
+	for (int i = 0; i < NUMBEROFSTROKES; i++) {
+		strokes[i].addStrokePosition(
+			x + ofRandom(-strokePositionVariation, strokePositionVariation),
+			y + ofRandom(-strokePositionVariation, strokePositionVariation)
+		);
 	}
 	resetBirthTime();
 }
