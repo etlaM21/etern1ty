@@ -1,7 +1,7 @@
 #include "ofApp.h"
-#include "Brush.h"
+#include "Painter.h"
 
-Brush userBrush;
+Painter userPainter;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -17,12 +17,12 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+	userPainter.update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
 	ofSetColor(255);
-	userBrush.decayStrokes();
 	
 	shader.begin();
 
@@ -32,9 +32,10 @@ void ofApp::draw(){
 		allPaths[i].draw();
 	} */
 
-	userBrush.draw();
+	userPainter.displayCanvas();
 
 	shader.end();
+	userPainter.displayDebugCanvas();
 }
 
 //--------------------------------------------------------------
@@ -54,17 +55,17 @@ void ofApp::mouseMoved(int x, int y){
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-	userBrush.moveBrush(x, y);
+	userPainter.moveBrush(x, y);
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-	userBrush.startNewStroke();
+	userPainter.startNewStroke();
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-	userBrush.endStroke();
+	userPainter.endStroke();
 }
 
 //--------------------------------------------------------------

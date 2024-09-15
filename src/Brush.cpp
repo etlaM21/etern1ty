@@ -8,13 +8,14 @@ Brush::Brush(){
 }
 //--------------------------------------------------------------
 void Brush::draw(){
-    
-    drawStroke.draw();
 
 	for( int i = 0; i < currentAllStrokeCount; i++){
 		allStrokes[i].draw();
 	} 
-    
+
+	if (currentAllStrokeCount < MAXIMUMSTROKES) {
+		drawStroke.draw();
+	}
 }
 
 

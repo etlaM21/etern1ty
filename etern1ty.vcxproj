@@ -108,12 +108,14 @@
     <ClCompile Include="src\BrushStroke.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
+    <ClCompile Include="src\Painter.cpp" />
     <ClCompile Include="src\Stroke.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Brush.h" />
     <ClInclude Include="src\BrushStroke.h" />
     <ClInclude Include="src\ofApp.h" />
+    <ClInclude Include="src\Painter.h" />
     <ClInclude Include="src\Stroke.h" />
   </ItemGroup>
   <ItemGroup>
