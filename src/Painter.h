@@ -6,6 +6,9 @@
 class Painter : public ofBaseApp{
 	public:
 		Painter();
+
+		void initalize();
+
 		void displayCanvas();
 		void displayDebugCanvas();
 		void update();
@@ -17,9 +20,9 @@ class Painter : public ofBaseApp{
     private:
 		// Helper
 		bool finishedStroke = false;
-		int width = 500;
+		int width;
 		int getWidth() const { return width; }
-		int height = 500;
+		int height;
 		int getHeight() const { return height; }
 
 		// Behaviour
@@ -35,9 +38,9 @@ class Painter : public ofBaseApp{
 		bool targetHit();
 		void drawAgent();
 
-		glm::vec2 location = { ofRandom(0, width), ofRandom(0, height) };
+		glm::vec2 location;
 		glm::vec2 lastLocation;
-		glm::vec2 velocity = { ofRandom(0, 50) - 25, ofRandom(0, 50) - 25 };
-		glm::vec2 acceleration = { 0, 0 };
+		glm::vec2 velocity;
+		glm::vec2 acceleration;
 		glm::vec2 target;
 };

@@ -8,6 +8,15 @@ Painter::Painter(){
     
 }
 //--------------------------------------------------------------
+void Painter::initalize() {
+	width = ofGetWidth();
+	height = ofGetHeight();
+	acceleration = { 0, 0 };
+	velocity = { ofRandom(0, 50) - 25, ofRandom(0, 50) - 25 };
+	location = { ofRandom(0, width), ofRandom(0, height) };
+	target = { ofRandom(0, width), ofRandom(0, height) };
+}
+//--------------------------------------------------------------
 void Painter::displayCanvas(){
 	userBrush.draw();
 }

@@ -13,6 +13,7 @@ void ofApp::setup(){
 	ofBackground(255,255,255);
 	
 	// drawPath.setFilled(true);
+	userPainter.initalize();
 }
 
 //--------------------------------------------------------------
