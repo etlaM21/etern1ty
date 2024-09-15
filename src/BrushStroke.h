@@ -19,10 +19,12 @@ class BrushStroke : public ofBaseApp{
 		float zPosition;
 		float birthtime;
 
+		int alpha = 75;
+
 		float lifeTime = 30.0;
 		float lifeTimeLeft = lifeTime;
 		float decayTime = 10.0;
-		float decayStepLinear = 255 / decayTime;
+		float decayStepLinear = alpha / decayTime;
 
 		float strokePositionVariation = 1.5;
 		Stroke strokes[NUMBEROFSTROKES];

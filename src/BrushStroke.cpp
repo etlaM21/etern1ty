@@ -15,7 +15,9 @@ BrushStroke::BrushStroke(float zHeight, ofColor& paintColor){
 	zPosition = zHeight;
 	birthtime = ofGetElapsedTimef();
 	for (int i = 0; i < NUMBEROFSTROKES; i++) {
-		strokes[i] = Stroke(zHeight + i / 100, paintColor);
+		ofColor strokeColor = paintColor;
+		strokeColor.a = alpha;
+		strokes[i] = Stroke(zHeight + i / 100, strokeColor);
 	}
 }
 //--------------------------------------------------------------
@@ -31,7 +33,7 @@ float BrushStroke::decay() {
 	lifeTimeLeft = lifeTime - (ofGetElapsedTimef() - birthtime);
 	if (lifeTimeLeft <= decayTime && lifeTimeLeft > 0.0) {
 		for (int i = 0; i < NUMBEROFSTROKES; i++) {
-			strokes[i].setAlphaColor(255 * (lifeTimeLeft / decayTime));
+			strokes[i].setAlphaColor(alpha * (lifeTimeLeft / decayTime));
 		}
 	}
 	return lifeTimeLeft;

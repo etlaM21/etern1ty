@@ -40,7 +40,7 @@ void Brush::endStroke(){
 
 void Brush::decayStrokes() {
 	for (int i = 0; i < currentAllStrokeCount; i++) {
-		float timeLeft = allStrokes[i].decay(); // returns lifeTimeLeft;
+		float timeLeft = allStrokes[i].decay(); // returns lifeTimeLeft and sets new alpha value
 		if (timeLeft <= 0.0) {
 			// Shift all remaining strokes left by one position
 			for (int j = i; j < currentAllStrokeCount - 1; j++) {
