@@ -60,7 +60,10 @@ void Stroke::addWidthToLine(const ofPolyline& pointLine){
 
 	for (int vertexIndex = 0; vertexIndex < vertices.size(); vertexIndex++) {
 		if(linePathWidth.size() <= vertexIndex) {
-			linePathWidth.push_back(glm::vec2(lineSize * ofRandom(1 - lineSizeVariation, 1), lineSize * ofRandom(1 - lineSizeVariation, 1)));
+			// linePathWidth.push_back(glm::vec2(lineSize * ofRandom(1 - lineSizeVariation, 1), lineSize * ofRandom(1 - lineSizeVariation, 1)));
+			// float variation = ofRandom(1 - lineSizeVariation, 1);
+			float variation = (ofNoise(vertices[vertexIndex].x, vertices[vertexIndex].y, ofGetElapsedTimef()) * + 1) * lineSizeVariation;
+			linePathWidth.push_back(glm::vec2(lineSize + variation, lineSize + variation));
 		}
 	}
 	

@@ -23,7 +23,7 @@ class Stroke : public ofBaseApp{
         ofPolyline linePath;
         vector<glm::vec2> linePathWidth;
         float lineSize = 2.0;
-        float lineSizeVariation = 0.5;
+        float lineSizeVariation = 1.0;
         float simplificationFactor = 1.66;
         vector<glm::vec3> pathVerts;
         vector<glm::vec2> linePoints;

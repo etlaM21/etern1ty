@@ -1,6 +1,6 @@
 #pragma once
 
-#define MAXIMUMSTROKES 100
+#define MAXIMUMSTROKES 250
 
 #include "ofMain.h"
 #include "BrushStroke.h"

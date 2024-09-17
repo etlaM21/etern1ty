@@ -36,7 +36,7 @@ void ofApp::draw(){
 	userPainter.displayCanvas();
 
 	shader.end();
-	userPainter.displayDebugCanvas();
+	// userPainter.displayDebugCanvas();
 }
 
 //--------------------------------------------------------------
