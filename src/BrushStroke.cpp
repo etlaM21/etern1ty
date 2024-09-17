@@ -6,6 +6,7 @@
 BrushStroke::BrushStroke(){
 	zPosition = 0;
 	birthtime = ofGetElapsedTimef();
+	currentStrokeVertices = 0;
 	for (int i = 0; i < NUMBEROFSTROKES; i++) {
 		strokes[i] = Stroke();
 	}
@@ -14,6 +15,7 @@ BrushStroke::BrushStroke(){
 BrushStroke::BrushStroke(float zHeight, ofColor& paintColor){
 	zPosition = zHeight;
 	birthtime = ofGetElapsedTimef();
+	currentStrokeVertices = 0;
 	for (int i = 0; i < NUMBEROFSTROKES; i++) {
 		ofColor strokeColor = paintColor;
 		strokeColor.a = alpha;
@@ -48,6 +50,19 @@ void BrushStroke::addStrokePosition(int x, int y){
 	}
 	resetBirthTime();
 }
+
+int BrushStroke::getStrokeVertices() {
+
+	for (int i = 0; i < NUMBEROFSTROKES; i++) {
+		int nVertices = strokes[i].getStrokeVertices();
+		if (nVertices > currentStrokeVertices) {
+			currentStrokeVertices = nVertices;
+		}
+	}
+
+	return currentStrokeVertices;
+}
+
 
 void BrushStroke::resetBirthTime() {
 	birthtime = ofGetElapsedTimef();

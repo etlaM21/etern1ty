@@ -9,11 +9,14 @@ class BrushStroke : public ofBaseApp{
 	public:
 		BrushStroke();
 		BrushStroke(float zHeight, ofColor& paintColor);
+
 		void draw();
         
 		void addStrokePosition(int x, int y);
 
-		float BrushStroke::decay();
+		float decay();
+
+		int getStrokeVertices();
 
     private:
 		float zPosition;
@@ -28,6 +31,7 @@ class BrushStroke : public ofBaseApp{
 
 		float strokePositionVariation = 1.5;
 		Stroke strokes[NUMBEROFSTROKES];
+		int currentStrokeVertices;
 		// vector<Stroke> strokes;
 
 		void resetBirthTime();

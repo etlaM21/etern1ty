@@ -134,3 +134,7 @@ void Stroke::setAlphaColor(float newAlpha) {
 		}
 	}
 }
+
+int Stroke::getStrokeVertices() {
+	return drawMesh.getNumVertices();
+}

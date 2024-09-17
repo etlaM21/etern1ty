@@ -31,6 +31,7 @@ void Painter::update() {
 	userBrush.decayStrokes();
 	if (finishedStroke) {
 		userBrush.endStroke();
+		userBrush.setColor(palette[(int)ofRandom(10)]);
 		userBrush.startNewStroke();
 	}
 	else {

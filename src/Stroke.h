@@ -14,6 +14,8 @@ class Stroke : public ofBaseApp{
 
 		void setAlphaColor(float newAlpha);
 
+		int getStrokeVertices();
+
     private:
 		float zPosition;
 		ofColor drawColor;
@@ -27,6 +29,7 @@ class Stroke : public ofBaseApp{
         float simplificationFactor = 1.66;
         vector<glm::vec3> pathVerts;
         vector<glm::vec2> linePoints;
+		int currentStrokeVertices;
 
 		ofPolyline getLineFromPoints(const vector<glm::vec2>& points);
 		void addWidthToLine(const ofPolyline& pointLine); 

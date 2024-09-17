@@ -18,15 +18,35 @@ void Brush::draw(){
 	}
 }
 
+//--------------------------------------------------------------
+void Brush::setColor(ofColor& newColor) {
+	currentColor = newColor;
+}
 
 void Brush::moveBrush(int x, int y){
 	drawStroke.addStrokePosition(x, y);
+	if (drawStroke.getStrokeVertices() >= MAXIMUMSTROKEVERTICES) {
+		endStroke();
+		startNewStroke();
+		drawStroke.addStrokePosition(fourthLastX, fourthLastY);
+		drawStroke.addStrokePosition(thirdLastX, thirdLastY);
+		drawStroke.addStrokePosition(secondLastX, secondLastY);
+		drawStroke.addStrokePosition(lastX, lastY);
+		drawStroke.addStrokePosition(x, y);
+	}
+	fourthLastX = thirdLastX;
+	fourthLastY = thirdLastY;
+	thirdLastX = secondLastX;
+	thirdLastY = secondLastY;
+	secondLastX = lastX;
+	secondLastY = lastY;
+	lastX = x;
+	lastY = y;
 }
 
 //--------------------------------------------------------------
 void Brush::startNewStroke(){
-	drawStroke = BrushStroke(currentAllStrokeCount / 10, palette[(int) ofRandom(10)]);
-    // delete drawStroke;
+	drawStroke = BrushStroke(currentAllStrokeCount / 10, currentColor);
 }
 
 //--------------------------------------------------------------
@@ -35,7 +55,6 @@ void Brush::endStroke(){
 		allStrokes[currentAllStrokeCount] = drawStroke;
 		currentAllStrokeCount++;  // Increment the stroke count
 	}
-	// allStrokes.push_back(drawStroke);
 }
 
 void Brush::decayStrokes() {
