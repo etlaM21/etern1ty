@@ -22,6 +22,30 @@ BrushStroke::BrushStroke(float zHeight, ofColor& paintColor){
 		strokes[i] = Stroke(zHeight + i / 100, strokeColor);
 	}
 }
+
+BrushStroke::BrushStroke(float zHeight, ofColor& paintColor, int& _alpha, float& _lifeTime, float& _decayTime, float& _strokePositionVariation,
+	// For Stroke CLass
+	float& _lineSize, float& _lineSizeVariation, float& _simplificationFactor) {
+	zPosition = zHeight;
+	birthtime = ofGetElapsedTimef();
+
+	int alpha = _alpha;
+
+	float lifeTime = _lifeTime;
+	float lifeTimeLeft = lifeTime;
+	float decayTime = _decayTime;
+	float decayStepLinear = alpha / decayTime;
+
+	float strokePositionVariation = _strokePositionVariation;
+
+	currentStrokeVertices = 0;
+	for (int i = 0; i < NUMBEROFSTROKES; i++) {
+		ofColor strokeColor = paintColor;
+		strokeColor.a = alpha;
+		strokes[i] = Stroke(zHeight + i / 100, strokeColor, _lineSize, _lineSizeVariation, _simplificationFactor);
+	}
+}
+
 //--------------------------------------------------------------
 void BrushStroke::draw(){
   

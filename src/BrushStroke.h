@@ -9,6 +9,11 @@ class BrushStroke : public ofBaseApp{
 	public:
 		BrushStroke();
 		BrushStroke(float zHeight, ofColor& paintColor);
+		BrushStroke(float zHeight, ofColor& paintColor, int& _alpha, float& _lifeTime, float& _decayTime, float& _strokePositionVariation,
+		// For Stroke CLass
+		float& _lineSize, float& _lineSizeVariation, float& _simplificationFactor
+		);
+
 
 		void draw();
         
@@ -30,6 +35,7 @@ class BrushStroke : public ofBaseApp{
 		float decayStepLinear = alpha / decayTime;
 
 		float strokePositionVariation = 1.5;
+
 		Stroke strokes[NUMBEROFSTROKES];
 		int currentStrokeVertices;
 		// vector<Stroke> strokes;

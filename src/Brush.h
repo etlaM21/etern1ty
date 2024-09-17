@@ -9,6 +9,12 @@
 class Brush : public ofBaseApp{
 	public:
 		Brush();
+		Brush(
+			// For BrushStroke Class
+			int& _alpha, float& _lifeTime, float& _decayTime, float& _strokePositionVariation,
+			// For Stroke CLass
+			float& _lineSize, float& _lineSizeVariation, float& _simplificationFactor
+		);
 		void draw();
 
 		void setColor(ofColor& newColor);
@@ -20,11 +26,22 @@ class Brush : public ofBaseApp{
 		void decayStrokes();
 
     private:
+		// For BrushStroke Class
+		int BrushStroke_alpha;
+		float BrushStroke_lifeTime;
+		float BrushStroke_decayTime;
+		float BrushStroke_strokePositionVariation;
+		// For Stroke CLass
+		float Stroke_lineSize;
+		float Stroke_lineSizeVariation;
+		float Stroke_simplificationFactor;
+
 		BrushStroke drawStroke;
 		int currentAllStrokeCount = 0;
 		BrushStroke allStrokes[MAXIMUMSTROKES];
 
 		ofColor currentColor;
+
 
 		int fourthLastX;
 		int fourthLastY;

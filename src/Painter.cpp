@@ -2,11 +2,37 @@
 #include "Painter.h"
 #include "Brush.h"
 
-Brush userBrush;
 
 Painter::Painter(){
     
 }
+
+
+Painter::Painter(
+	// Behaviour
+	int _slowDownThreshhold,
+	float _noiseInfluence,
+	int _hitRadius,
+	float _maxSpeed,
+	float _maxForce,
+	// Paint Style
+	std::vector<ofColor>& _palette,
+	int _alpha, 
+	float _lifeTime, 
+	float _decayTime, 
+	float _strokePositionVariation,
+	float _lineSize, 
+	float _lineSizeVariation, 
+	float _simplificationFactor
+	) {
+	userBrush = std::make_unique<Brush>(
+		// For BrushStroke Class
+		_alpha, _lifeTime, _decayTime, _strokePositionVariation,
+		// For Stroke Class
+		_lineSize, _lineSizeVariation, _simplificationFactor
+	);
+}
+
 //--------------------------------------------------------------
 void Painter::initalize() {
 	width = ofGetWidth();
@@ -18,7 +44,7 @@ void Painter::initalize() {
 }
 //--------------------------------------------------------------
 void Painter::displayCanvas(){
-	userBrush.draw();
+	userBrush->draw();
 }
 //--------------------------------------------------------------
 void Painter::displayDebugCanvas() {
@@ -28,30 +54,30 @@ void Painter::displayDebugCanvas() {
 
 //--------------------------------------------------------------
 void Painter::update() {
-	userBrush.decayStrokes();
+	userBrush->decayStrokes();
 	if (finishedStroke) {
-		userBrush.endStroke();
-		userBrush.setColor(palette[(int)ofRandom(10)]);
-		userBrush.startNewStroke();
+		userBrush->endStroke();
+		userBrush->setColor(palette[(int)rand() % palette.size()]);
+		userBrush->startNewStroke();
 	}
 	else {
-		userBrush.moveBrush(location.x, location.y);
+		userBrush->moveBrush(location.x, location.y);
 	}
 	updateLocation();
 }
 
 void Painter::moveBrush(int x, int y){
-	userBrush.moveBrush(x, y);
+	userBrush->moveBrush(x, y);
 }
 
 //--------------------------------------------------------------
 void Painter::startNewStroke(){
-	userBrush.startNewStroke();
+	userBrush->startNewStroke();
 }
 
 //--------------------------------------------------------------
 void Painter::endStroke(){
-	userBrush.endStroke();
+	userBrush->endStroke();
 }
 //--------------------------------------------------------------
 // BEHAVIOUR

@@ -10,6 +10,15 @@ Stroke::Stroke(float zHeight, ofColor& paintColor){
 	zPosition = zHeight;
 	drawColor = paintColor;
 }
+
+Stroke::Stroke(float zHeight, ofColor& paintColor, float& _lineSize, float& _lineSizeVariation, float& _simplificationFactor) {
+	zPosition = zHeight;
+	drawColor = paintColor;
+	lineSize = _lineSize;
+	lineSizeVariation = _lineSizeVariation;
+	simplificationFactor = _simplificationFactor;
+}
+
 //--------------------------------------------------------------
 void Stroke::draw(){
     

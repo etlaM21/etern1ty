@@ -6,6 +6,23 @@
 class Painter : public ofBaseApp{
 	public:
 		Painter();
+		Painter(
+			// Behaviour
+			int _slowDownThreshhold,
+			float _noiseInfluence,
+			int _hitRadius,
+			float _maxSpeed,
+			float _maxForce,
+			// Paint Style
+			std::vector<ofColor>& _palette,
+			int _alpha,
+			float _lifeTime,
+			float _decayTime,
+			float _strokePositionVariation,
+			float _lineSize,
+			float _lineSizeVariation,
+			float _simplificationFactor
+		);
 
 		void initalize();
 
@@ -18,6 +35,7 @@ class Painter : public ofBaseApp{
 		void endStroke();
 
     private:
+		std::unique_ptr<Brush> userBrush;  // Use smart pointer to allocate on the heap
 		// Helper
 		bool finishedStroke = false;
 		int width;
@@ -44,7 +62,7 @@ class Painter : public ofBaseApp{
 		glm::vec2 acceleration;
 		glm::vec2 target;
 
-		ofColor palette[10] = {
+		std::vector<ofColor> palette = {
 			ofColor(100, 255, 255),
 			ofColor(100, 80, 255),
 			ofColor(250, 125, 255),
@@ -54,6 +72,6 @@ class Painter : public ofBaseApp{
 			ofColor(0, 0, 25),
 			ofColor(0, 0, 25),
 			ofColor(0, 0, 25),
-			ofColor(0, 0, 25),
+			ofColor(0, 0, 25)
 		};
 };

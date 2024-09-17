@@ -6,6 +6,9 @@ class Stroke : public ofBaseApp{
 	public:
 		Stroke();
 		Stroke(float zHeight, ofColor& paintColor);
+		Stroke(float zHeight, ofColor& paintColor, float& _lineSize, float& _lineSizeVariation, float& _simplificationFactor);
+
+
 		void draw();
         
 		void addStrokePosition(int x, int y);
