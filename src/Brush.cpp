@@ -28,12 +28,14 @@ void Brush::moveBrush(int x, int y){
 	if (drawStroke.getStrokeVertices() >= MAXIMUMSTROKEVERTICES) {
 		endStroke();
 		startNewStroke();
+		// This is not elegant but works to properly start the new stroke IN the old one
 		drawStroke.addStrokePosition(fourthLastX, fourthLastY);
 		drawStroke.addStrokePosition(thirdLastX, thirdLastY);
 		drawStroke.addStrokePosition(secondLastX, secondLastY);
 		drawStroke.addStrokePosition(lastX, lastY);
 		drawStroke.addStrokePosition(x, y);
 	}
+	// This is not elegant but works to properly start the new stroke IN the old one
 	fourthLastX = thirdLastX;
 	fourthLastY = thirdLastY;
 	thirdLastX = secondLastX;
