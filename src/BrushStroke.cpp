@@ -29,14 +29,14 @@ BrushStroke::BrushStroke(float zHeight, ofColor& paintColor, int& _alpha, float&
 	zPosition = zHeight;
 	birthtime = ofGetElapsedTimef();
 
-	int alpha = _alpha;
+	alpha = _alpha;
 
-	float lifeTime = _lifeTime;
-	float lifeTimeLeft = lifeTime;
-	float decayTime = _decayTime;
-	float decayStepLinear = alpha / decayTime;
+	lifeTime = _lifeTime;
+	lifeTimeLeft = lifeTime;
+	decayTime = _decayTime;
+	decayStepLinear = alpha / decayTime;
 
-	float strokePositionVariation = _strokePositionVariation;
+	strokePositionVariation = _strokePositionVariation;
 
 	currentStrokeVertices = 0;
 	for (int i = 0; i < NUMBEROFSTROKES; i++) {
