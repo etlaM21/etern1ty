@@ -1,7 +1,7 @@
 #pragma once
 
-#define MAXIMUMSTROKES 250
-#define MAXIMUMSTROKEVERTICES 25
+#define MAXIMUMSTROKES 500
+#define MAXIMUMSTROKEVERTICES 50
 
 #include "ofMain.h"
 #include "BrushStroke.h"
@@ -43,12 +43,12 @@ class Brush : public ofBaseApp{
 		ofColor currentColor;
 
 
-		int fourthLastX;
-		int fourthLastY;
-		int thirdLastX;
-		int thirdLastY;
-		int secondLastX;
-		int secondLastY;
-		int lastX;
-		int lastY;
+		int fourthLastX = 0;
+		int fourthLastY = 0;
+		int thirdLastX = 0;
+		int thirdLastY = 0;
+		int secondLastX = 0;
+		int secondLastY = 0;
+		int lastX = 0;
+		int lastY = 0;
 };

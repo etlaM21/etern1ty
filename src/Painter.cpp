@@ -4,7 +4,7 @@
 
 
 Painter::Painter(){
-    
+
 }
 
 
@@ -31,10 +31,26 @@ Painter::Painter(
 		// For Stroke Class
 		_lineSize, _lineSizeVariation, _simplificationFactor
 	);
+	// Behaviour
+	slowDownThreshhold = _slowDownThreshhold;
+	noiseInfluence = _noiseInfluence;
+	hitRadius = _hitRadius;
+	maxSpeed = _maxSpeed;
+	maxForce = maxForce;
+	palette = _palette;
 }
 
 //--------------------------------------------------------------
 void Painter::initalize() {
+	width = ofGetWidth();
+	height = ofGetHeight();
+	acceleration = { 0, 0 };
+	velocity = { ofRandom(0, 50) - 25, ofRandom(0, 50) - 25 };
+	location = { ofRandom(0, width), ofRandom(0, height) };
+	target = { ofRandom(0, width), ofRandom(0, height) };
+}
+
+void Painter::setPalette(std::vector<ofColor>&_palette) {
 	width = ofGetWidth();
 	height = ofGetHeight();
 	acceleration = { 0, 0 };
@@ -57,7 +73,7 @@ void Painter::update() {
 	userBrush->decayStrokes();
 	if (finishedStroke) {
 		userBrush->endStroke();
-		userBrush->setColor(palette[(int)rand() % palette.size()]);
+		userBrush->setColor(palette[(int)ofRandom(0,palette.size())]);
 		userBrush->startNewStroke();
 	}
 	else {

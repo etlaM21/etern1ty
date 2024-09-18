@@ -25,6 +25,7 @@ class Painter : public ofBaseApp{
 		);
 
 		void initalize();
+		void setPalette(std::vector<ofColor>& _palette);
 
 		void displayCanvas();
 		void displayDebugCanvas();
@@ -63,13 +64,13 @@ class Painter : public ofBaseApp{
 		glm::vec2 target;
 
 		std::vector<ofColor> palette = {
-			ofColor(100, 255, 255),
-			ofColor(100, 80, 255),
-			ofColor(250, 125, 255),
-			ofColor(250, 125, 186),
-			ofColor(250, 225, 123),
-			ofColor(125, 175, 186),
-			ofColor(0, 0, 25),
+			ofColor(100, 0, 255),
+			ofColor(100, 0, 255),
+			ofColor(250, 0, 255),
+			ofColor(250, 0, 186),
+			ofColor(250, 0, 123),
+			ofColor(125, 0, 186),
+			ofColor(0, 0, 9),
 			ofColor(0, 0, 25),
 			ofColor(0, 0, 25),
 			ofColor(0, 0, 25)

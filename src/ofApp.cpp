@@ -12,16 +12,16 @@ void ofApp::setup(){
 	}
 	ofBackground(255,255,255);
 	// Christel
-	/*
-	std::vector<ofColor> myPalette = { 
-		ofColor(331, 78.1, 74.9),
-		ofColor(49, 84.9, 68.8),
-		ofColor(263, 21.4, 16.5),
-		ofColor(263, 21.4, 16.5),
-		ofColor(263, 21.4, 16.5),
-		ofColor(49, 9.7, 22.2),
-		ofColor(49, 9.7, 22.2),
-		ofColor(49, 9.7, 22.2)
+	
+	std::vector<ofColor> christelPalette = {
+		ofColor(234.45833333333331, 199.15499999999997, 190.995),
+		ofColor(34.70833333333333, 216.495, 175.43999999999997),
+		ofColor(186.29166666666666, 54.56999999999999, 42.074999999999996),
+		ofColor(186.29166666666666, 54.56999999999999, 42.074999999999996),
+		ofColor(186.29166666666666, 54.56999999999999, 42.074999999999996),
+		ofColor(34.70833333333333, 24.734999999999996, 56.60999999999999),
+		ofColor(34.70833333333333, 24.734999999999996, 56.60999999999999),
+		ofColor(34.70833333333333, 24.734999999999996, 56.60999999999999)
 
 	};
 	userPainter = Painter(
@@ -32,42 +32,45 @@ void ofApp::setup(){
 		8.5f, // _maxSpeed
 		0.4f, // _maxForce
 		// Paint Style
-		myPalette,  // _palette
+		christelPalette,  // _palette
 		75, // _alpha
 		180.0f, // _lifeTime
 		15.0f, // _decayTime
 		1.5f, // _strokePositionVariation
 		2.0f, // _lineSize
-		1.0f, // _lineSizeVariation
+		3.5f, // _lineSizeVariation
 		1.66f // _simplificationFactor
-	); */
+	);
 
 	// Heinrich
-	std::vector<ofColor> myPalette = {
-		ofColor(121, 100.0, 16.5),
-		ofColor(126, 70.5, 12.0),
-		ofColor(6, 100.0, 32.4),
-		ofColor(98, 29.0, 27.1),
-		ofColor(29, 74.7, 38.8),
-		ofColor(147, 38.8, 26.3)
+	/*
+	std::vector<ofColor> heinrichPalette = {
+		ofColor(85.70833333333334, 254.99999999999997, 42.074999999999996),
+		ofColor(89.25, 179.77499999999998, 30.599999999999998),
+		ofColor(70.125, 140.25, 56.1),
+		ofColor(87.8, 160.65, 56.1),
+		ofColor(4.25, 254.99999999999997, 82.61999999999999),
+		ofColor(69.41666666666666, 73.94999999999999, 69.105),
+		ofColor(20.541666666666668, 190.48499999999999, 98.93999999999998),
+		ofColor(104.125, 98.93999999999998, 67.065)
 	};
 	userPainter = Painter(
 		// Behaviour
 		175, // _slowDownThreshhold
-		2.0f, // _noiseInfluence
+		20.0f, // _noiseInfluence
 		40, // _hitRadius
-		4.1f, // _maxSpeed
+		3.8f, // _maxSpeed
 		1.5f, // _maxForce
 		// Paint Style
-		myPalette,  // _palette
+		heinrichPalette,  // _palette
 		50, // _alpha
 		180.0f, // _lifeTime
 		15.0f, // _decayTime
-		50.0f, // _strokePositionVariation
+		25.0f, // _strokePositionVariation
 		20.0f, // _lineSize
-		5.0f, // _lineSizeVariation
+		10.0f, // _lineSizeVariation
 		1.12f // _simplificationFactor
-	);
+	);*/
 	// drawPath.setFilled(true);
 	userPainter.initalize();
 }
