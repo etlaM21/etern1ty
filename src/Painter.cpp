@@ -50,6 +50,9 @@ void Painter::initalize() {
 	// Create a random direction, then scale it to maxSpeed immediately
 	velocity = glm::vec2(ofRandom(-1, 1), ofRandom(-1, 1));
 	velocity = glm::normalize(velocity) * maxSpeed;
+	// This applies the correct brush settings (Heinrich/Christel)
+	// to the active stroke immediately.
+	startNewStroke();
 }
 
 void Painter::setPalette(std::vector<ofColor>&_palette) {
