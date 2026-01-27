@@ -45,9 +45,11 @@ void Painter::initalize() {
 	width = ofGetWidth();
 	height = ofGetHeight();
 	acceleration = { 0, 0 };
-	velocity = { ofRandom(0, 50) - 25, ofRandom(0, 50) - 25 };
 	location = { ofRandom(0, width), ofRandom(0, height) };
 	target = { ofRandom(0, width), ofRandom(0, height) };
+	// Create a random direction, then scale it to maxSpeed immediately
+	velocity = glm::vec2(ofRandom(-1, 1), ofRandom(-1, 1));
+	velocity = glm::normalize(velocity) * maxSpeed;
 }
 
 void Painter::setPalette(std::vector<ofColor>&_palette) {
@@ -112,7 +114,9 @@ void Painter::updateLocation() {
 		finishedStroke = true;
 		location = { ofRandom(0, width), ofRandom(0, height) };
 		target = { ofRandom(0, width), ofRandom(0, height) };
-		velocity = { ofRandom(0, 50) - 25, ofRandom(0, 50) - 25 };
+		// Create a random direction, then scale it to maxSpeed immediately
+		velocity = glm::vec2(ofRandom(-1, 1), ofRandom(-1, 1));
+		velocity = glm::normalize(velocity) * maxSpeed;
 	}
 }
 
