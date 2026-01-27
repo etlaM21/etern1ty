@@ -2,7 +2,7 @@
 #include "ofApp.h"
 
 //========================================================================
-int main( ){
+int main(int argc, char * argv[]) {
 
 #ifdef OF_TARGET_OPENGLES
 	ofGLESWindowSettings settings;
@@ -13,9 +13,15 @@ int main( ){
 #endif
 
 	auto window = ofCreateWindow(settings);
+	auto app = make_shared<ofApp>();
+
 	ofSetFullscreen(false);
 	// ofSetupOpenGL(1024, 768, OF_FULLSCREEN);
-	ofRunApp(window, make_shared<ofApp>());
+	// Pass the arguments to a custom function in your ofApp
+	app->arguments.assign(argv, argv + argc);
+
+	ofRunApp(window, app);
+	// ofRunApp(window, make_shared<ofApp>());
 	ofRunMainLoop();
 
 }

@@ -5,6 +5,10 @@
 
 class ofApp : public ofBaseApp{
 	public:
+		vector<string> arguments;
+
+		string painterName = "christel";
+
 		void setup();
 		void update();
 		void draw();
