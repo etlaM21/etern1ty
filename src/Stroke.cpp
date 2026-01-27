@@ -124,9 +124,9 @@ void Stroke::colorMesh(ofMesh& meshToColor) {
 	} 
     for (int i = index; i < meshToColor.getNumVertices(); i++) {
 		meshToColor.addColor(ofColor::fromHsb(
-			drawColor[0] * ofRandom(1, 0.95),
-			drawColor[1] * ofRandom(1, 0.85),
-			drawColor[2] * ofRandom(1, 0.75),
+			drawColor[0] * ofRandom(0.95, 1.0),
+			drawColor[1] * ofRandom(0.85, 1.0),
+			drawColor[2] * ofRandom(0.75, 1.0),
 			drawColor[3])
 		); // VALUES: 0 -> 255
     }
