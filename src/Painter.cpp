@@ -36,7 +36,7 @@ Painter::Painter(
 	noiseInfluence = _noiseInfluence;
 	hitRadius = _hitRadius;
 	maxSpeed = _maxSpeed;
-	maxForce = maxForce;
+	maxForce = _maxForce;
 	palette = _palette;
 }
 
@@ -76,15 +76,14 @@ void Painter::displayDebugCanvas() {
 //--------------------------------------------------------------
 void Painter::update() {
 	userBrush->decayStrokes();
+	updateLocation();
 	if (finishedStroke) {
 		userBrush->endStroke();
 		userBrush->setColor(palette[(int)ofRandom(0,palette.size())]);
 		userBrush->startNewStroke();
+		finishedStroke = false;
 	}
-	else {
-		userBrush->moveBrush(location.x, location.y);
-	}
-	updateLocation();
+	userBrush->moveBrush(location.x, location.y);
 }
 
 void Painter::moveBrush(int x, int y){
@@ -113,6 +112,9 @@ void Painter::updateLocation() {
 	}
 	location += velocity;
 	acceleration *= 0;
+
+	checkBorders();
+
 	if (targetHit()) {
 		finishedStroke = true;
 		location = { ofRandom(0, width), ofRandom(0, height) };
@@ -120,6 +122,7 @@ void Painter::updateLocation() {
 		// Create a random direction, then scale it to maxSpeed immediately
 		velocity = glm::vec2(ofRandom(-1, 1), ofRandom(-1, 1));
 		velocity = glm::normalize(velocity) * maxSpeed;
+		// userBrush->endStroke();
 	}
 }
 
@@ -127,7 +130,7 @@ void Painter::applyForce(glm::vec2 force) {
 	acceleration += force;
 }
 
-void Painter::seek(glm::vec2 target) {
+/*  void Painter::seek(glm::vec2 target) {
 	glm::vec2 desired = target - location;
 	desired = glm::normalize(desired);
 	float distance = glm::distance(location, target);
@@ -140,6 +143,49 @@ void Painter::seek(glm::vec2 target) {
 	desired += (ofNoise(location) * 2 - 1) * noiseInfluence;
 	glm::vec2 steer = desired - velocity;
 	// Limit
+	if (glm::length(steer) > maxForce) {
+		steer = glm::normalize(steer) * maxForce;
+	}
+	applyForce(steer);
+} */
+
+// Seek fix, adds noise properly and should keep agent from getting stuck
+void Painter::seek(glm::vec2 target) {
+	glm::vec2 desired = target - location;
+	float dist = glm::length(desired);
+
+	if (dist > 0) desired = glm::normalize(desired);
+
+	// Calculate the base speed based on distance (Arrival behavior)
+	if (dist < slowDownThreshhold) {
+		// Slow down as we arrive
+		desired *= ofMap(dist, 0, slowDownThreshhold, 0, maxSpeed);
+	} else {
+		// Go full speed when far away
+		desired *= maxSpeed;
+	}
+
+	// Calculate Noise
+	// We use an angle to create a true 2D direction, avoiding the "diagonal stuck" bug.
+	float noiseAngle = ofNoise(location.x * 0.005, location.y * 0.005, ofGetElapsedTimef() * 0.1) * TWO_PI * 4.0;
+	glm::vec2 noiseVector(cos(noiseAngle), sin(noiseAngle));
+
+	//Apply Noise
+	// If we are close to the target, we MUST reduce noise, or he will never hit it.
+	float currentNoiseInfluence = noiseInfluence;
+	if (dist < slowDownThreshhold) {
+		// Map noise to 0 at 'hitRadius', not at 0.
+        // This ensures that when he is close to the finish line, 
+        // the noise is COMPLETELY gone, allowing him to step over the line.
+        // We add a small buffer (hitRadius + 10) to be safe.
+		float safeZone = hitRadius * 1.2;
+		currentNoiseInfluence = ofMap(dist, safeZone, slowDownThreshhold, 0, noiseInfluence, true);
+	}
+
+	desired += noiseVector * currentNoiseInfluence;
+
+	// Steering Physics
+	glm::vec2 steer = desired - velocity;
 	if (glm::length(steer) > maxForce) {
 		steer = glm::normalize(steer) * maxForce;
 	}
@@ -176,4 +222,39 @@ void Painter::drawAgent() {
 	std::string hitRadiusStr = "HitRadius = ";
 	hitRadiusStr += ofToString(hitRadius);
 	ofDrawBitmapString(hitRadiusStr, 10, 125);
+}
+
+void Painter::checkBorders() {
+	// If he flies off-screen, steer him back to center strongly
+	// or simply wrap him around. Bouncing is best for this art style.
+
+	bool offScreen = false;
+	float margin = 50; // Buffer zone
+
+	if (location.x < -margin) {
+		location.x = -margin;
+		velocity.x *= -1;
+		offScreen = true;
+	}
+	if (location.x > width + margin) {
+		location.x = width + margin;
+		velocity.x *= -1;
+		offScreen = true;
+	}
+	if (location.y < -margin) {
+		location.y = -margin;
+		velocity.y *= -1;
+		offScreen = true;
+	}
+	if (location.y > height + margin) {
+		location.y = height + margin;
+		velocity.y *= -1;
+		offScreen = true;
+	}
+
+	// Uncomment this if bouncing looks weird:
+	/* if(offScreen) {
+        target = { ofRandom(width), ofRandom(height) };
+    } 
+    */
 }

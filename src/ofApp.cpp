@@ -36,8 +36,8 @@ void ofApp::setup(){
 		userPainter = Painter(
 			// Behaviour
 			175, // _slowDownThreshhold
-			20.0f, // _noiseInfluence
-			40, // _hitRadius
+			3.2f, // _noiseInfluence
+			100, // _hitRadius
 			3.8f, // _maxSpeed
 			1.5f, // _maxForce
 			// Paint Style

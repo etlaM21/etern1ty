@@ -28,10 +28,9 @@ void Brush::draw(){
 	for( int i = 0; i < currentAllStrokeCount; i++){
 		allStrokes[i].draw();
 	} 
-
-	if (currentAllStrokeCount < MAXIMUMSTROKES) {
-		drawStroke.draw();
-	}
+	// REMOVED the "if (currentAllStrokeCount < MAXIMUMSTROKES)" check.
+	// We ALWAYS want to see the active brush, even if the history is full.
+	drawStroke.draw();
 }
 
 //--------------------------------------------------------------
@@ -67,10 +66,23 @@ void Brush::startNewStroke(){
 	drawStroke = BrushStroke(currentAllStrokeCount / 10, currentColor, BrushStroke_alpha, BrushStroke_lifeTime, BrushStroke_decayTime, BrushStroke_strokePositionVariation, Stroke_lineSize, Stroke_lineSizeVariation, Stroke_simplificationFactor);
 }
 //--------------------------------------------------------------
-void Brush::endStroke(){
+void Brush::endStroke() {
 	if (currentAllStrokeCount < MAXIMUMSTROKES) {
+		// Normal case: Buffer has space
 		allStrokes[currentAllStrokeCount] = drawStroke;
-		currentAllStrokeCount++;  // Increment the stroke count
+		currentAllStrokeCount++;
+	} else {
+		// Full Case: Buffer is full!
+		// We must DELETE the oldest stroke (index 0) to save the new one.
+		// Shift everyone left by 1.
+		for (int i = 0; i < MAXIMUMSTROKES - 1; i++) {
+			allStrokes[i] = allStrokes[i + 1];
+		}
+
+		// Save the new stroke in the last slot
+		allStrokes[MAXIMUMSTROKES - 1] = drawStroke;
+
+		// Note: currentAllStrokeCount remains at MAXIMUMSTROKES
 	}
 }
 

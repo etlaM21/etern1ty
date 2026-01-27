@@ -35,6 +35,8 @@ class Painter : public ofBaseApp{
 		void startNewStroke();
 		void endStroke();
 
+		void checkBorders();
+
     private:
 		std::unique_ptr<Brush> userBrush;  // Use smart pointer to allocate on the heap
 		// Helper

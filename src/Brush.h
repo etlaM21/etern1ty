@@ -1,6 +1,6 @@
 #pragma once
 
-#define MAXIMUMSTROKES 500
+#define MAXIMUMSTROKES 1000
 #define MAXIMUMSTROKEVERTICES 50
 
 #include "ofMain.h"

@@ -11,7 +11,6 @@ int main(int argc, char * argv[]) {
 	ofGLWindowSettings settings;
 	settings.setGLVersion(3,2);
 #endif
-
 	auto window = ofCreateWindow(settings);
 	auto app = make_shared<ofApp>();
 
