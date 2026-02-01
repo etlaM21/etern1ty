@@ -94,7 +94,7 @@ void ofApp::update(){
 void ofApp::draw(){
 	ofSetColor(255);
 	
-	shader.begin();
+	// shader.begin();
 
 	/* drawPath.draw();
 
@@ -104,7 +104,7 @@ void ofApp::draw(){
 
 	userPainter.displayCanvas();
 
-	shader.end();
+	// shader.end();
 	// userPainter.displayDebugCanvas();
 }
 
